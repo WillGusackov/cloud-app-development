@@ -1,0 +1,32 @@
+[1mdiff --git a/simple-appv2/bin/simple-appv2.ts b/simple-appv2/bin/simple-appv2.ts[m
+[1mindex c97c669..de89855 100644[m
+[1m--- a/simple-appv2/bin/simple-appv2.ts[m
+[1m+++ b/simple-appv2/bin/simple-appv2.ts[m
+[36m@@ -1,20 +1,19 @@[m
+ #!/usr/bin/env node[m
+ import * as cdk from 'aws-cdk-lib/core';[m
+[31m-import { SimpleAppv2Stack } from '../lib/simple-app-stack';[m
+[31m-[m
+[32m+[m[32mimport { SimpleAppStack } from '../lib/simple-app-stack';[m
+ const app = new cdk.App();[m
+[31m-new SimpleAppv2Stack(app, 'SimpleAppv2Stack', {[m
+[32m+[m[32mnew SimpleAppStack(app, 'SimpleAppv2Stack', {[m
+   /* If you don't specify 'env', this stack will be environment-agnostic.[m
+    * Account/Region-dependent features and context lookups will not work,[m
+    * but a single synthesized template can be deployed anywhere. */[m
+[31m-[m
+[32m+[m[41m  [m
+   /* Uncomment the next line to specialize this stack for the AWS Account[m
+    * and Region that are implied by the current CLI configuration. */[m
+   // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },[m
+[31m-[m
+[32m+[m[41m  [m
+   /* Uncomment the next line if you know exactly what Account and Region you[m
+    * want to deploy the stack to. */[m
+   env: { account: '527600179174', region: 'eu-west-1' },[m
+[31m-[m
+[32m+[m[41m  [m
+   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */[m
+[31m-});[m
+[32m+[m[32m});[m
+\ No newline at end of file[m
