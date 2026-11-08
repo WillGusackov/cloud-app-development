@@ -1,4 +1,3 @@
-import {Movie} from '../shared/types'
 import { Movie, MovieCast } from "../shared/types";
 
 export const movieCasts: MovieCast[] = [

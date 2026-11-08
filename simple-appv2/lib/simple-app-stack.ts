@@ -93,6 +93,38 @@ export class SimpleAppStack extends cdk.Stack {
       }),
     });
 
+        //  Functions .....
+    const getMovieCastMembersFn = new lambdanode.NodejsFunction(
+      this,
+      "GetCastMemberFn",
+      {
+        architecture: lambda.Architecture.ARM_64,
+        runtime: lambda.Runtime.NODEJS_22_X,
+        entry: `${__dirname}/../lambdas/getMovieCastMembers.ts`,
+        timeout: cdk.Duration.seconds(10),
+        memorySize: 128,
+        environment: {
+          CAST_TABLE_NAME: movieCastsTable.tableName,
+          MOVIES_TABLE_NAME: moviesTable.tableName,
+          REGION: cdk.Aws.REGION,
+        },
+      }
+    );
+
+    const getMovieCastMembersURL = getMovieCastMembersFn.addFunctionUrl({
+      authType: lambda.FunctionUrlAuthType.NONE,
+      cors: {
+        allowedOrigins: ["*"],
+      },
+    });
+    
+    movieCastsTable.grantReadData(getMovieCastMembersFn);
+    moviesTable.grantReadData(getMovieCastMembersFn);
+
+        new cdk.CfnOutput(this, "Get Movie Cast Url", {
+      value: getMovieCastMembersURL.url,
+    });
+
 
     new cdk.CfnOutput(this, "Simple Function Url", { value: simpleFnURL.url });
     //new cdk.CfnOutput(this, "Movies Table Name", { value: moviesTable.tableName });
